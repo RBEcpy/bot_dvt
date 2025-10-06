@@ -6,6 +6,7 @@
 
     <!-- Robot_frames -->
     <xacro:include filename = "robot_core.xacro" />
+    <xacro:include filename = "ros2_control.xacro" />
 
     <!-- Controls -->
     <!-- <xacro:if value="$(arg use_ros2_control)">

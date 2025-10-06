@@ -8,6 +8,7 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, Command
 from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
+from launch.actions import TimerAction
 
 def generate_launch_description():
     pkg = 'src-cpp'
@@ -23,6 +24,7 @@ def generate_launch_description():
     # ---- Paths ----
     xacro_file = os.path.join(share, 'description', 'robot.urdf.xacro')
     world_sdf = os.path.join(share, 'worlds', 'playground.sdf')
+    controllers_yaml = os.path.join(share, 'config', 'controller_gz_sim.yaml')
 
     # ---- robot_description from xacro ----
     robot_description_cmd = Command(['xacro ', xacro_file])
@@ -65,6 +67,30 @@ def generate_launch_description():
         ],
     )
 
+    # ---- Spawners (controller_manager) ----
+    spawner_jsb = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=[
+            'joint_state_broadcaster',
+            '--controller-manager', '/controller_manager',
+            '--param-file', controllers_yaml
+        ],
+        output='screen'
+    )
+
+    spawner_diff = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=[
+            'diff_drive_controller',
+            '--controller-manager', '/controller_manager',
+            '--param-file', controllers_yaml
+        ],
+        output='screen'
+    )
+    delayed_spawners = TimerAction(period=2.5, actions=[spawner_jsb, spawner_diff])
+
     # ---- Bridge essential topics (LiDAR + base I/O) ----
     # [] direction markers:
     #   [... gz->ros ] and [ ros->gz ...]
@@ -77,9 +103,9 @@ def generate_launch_description():
             '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
 
             # Base I/O
-            '/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist',           # ros -> gz
-            '/odom@nav_msgs/msg/Odometry[gz.msgs.Odometry',             # gz -> ros
-            '/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',                # gz -> ros
+            # '/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist',           # ros -> gz
+            # '/odom@nav_msgs/msg/Odometry[gz.msgs.Odometry',             # gz -> ros
+            # '/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',                # gz -> ros
 
             # LiDAR (gz -> ros)
             '/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan',
@@ -93,4 +119,5 @@ def generate_launch_description():
     ld.add_action(gz)
     ld.add_action(spawn)
     ld.add_action(bridge)
+    ld.add_action(delayed_spawners)
     return ld
