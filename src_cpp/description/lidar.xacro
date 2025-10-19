@@ -61,11 +61,21 @@
                     <max>10.0</max>
                     <resolution>0.01</resolution>
                 </range>
+                <!-- fake noise -->
                 <noise>
                     <type>gaussian</type>
                     <mean>0.0</mean>
                     <stddev>0.01</stddev>
                 </noise>
+                
+                <!-- <plugin name="dropout_plugin" filename="liblidar_dropout.so">
+                    <dropout_rate>0.03</dropout_rate>
+                </plugin>
+
+                <plugin name="spike_plugin" filename="liblidar_spike.so">
+                    <spike_rate>0.01</spike_rate>
+                    <spike_amplitude>3.0</spike_amplitude>
+                </plugin> -->
             </lidar>
 
         <plugin filename="gz-sim-sensors-system"

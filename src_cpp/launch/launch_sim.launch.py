@@ -91,6 +91,22 @@ def generate_launch_description():
     )
     delayed_spawners = TimerAction(period=2.5, actions=[spawner_jsb, spawner_diff])
 
+    # ========== <<< ADDED: moving obstacle controller node (gz Harmonic) ==========
+    moving_box_ctrl = Node(  # <<< ADDED
+        package='src_cpp',    # <<< ADDED  (gói bạn build executable C++)
+        executable='multi_moving_box_controller_gz',  # <<< ADDED (tên executable C++)
+        name='moving_box_controller',                 # <<< ADDED
+        output='screen',                               # <<< ADDED
+        parameters=[{'world_name': 'playground'}]      # <<< ADDED (world của bạn)
+    )  # <<< ADDED
+
+    delayed_moving_ctrl = TimerAction(  # <<< ADDED
+        period=3.0,                     # đợi gz khởi động + expose service
+        actions=[moving_box_ctrl]
+    )  # <<< ADDED
+
+    # ==============================================================================
+
     # ---- Bridge essential topics (LiDAR + base I/O) ----
     # [] direction markers:
     #   [... gz->ros ] and [ ros->gz ...]
@@ -120,4 +136,6 @@ def generate_launch_description():
     ld.add_action(spawn)
     ld.add_action(bridge)
     ld.add_action(delayed_spawners)
+    ld.add_action(delayed_moving_ctrl)  # <<< ADDED
+    
     return ld

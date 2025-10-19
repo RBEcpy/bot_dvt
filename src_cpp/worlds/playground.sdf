@@ -1,5 +1,11 @@
 <sdf version='1.7'>
   <world name='default'>
+    <!-- Một hoặc nhiều model -->
+    <include>
+      <uri>model://VerticalMotion</uri>
+    </include>
+
+
     <light name='sun' type='directional'>
       <cast_shadows>1</cast_shadows>
       <pose>0 0 10 0 -0 0</pose>
@@ -67,7 +73,13 @@
     </model>
     <gravity>0 0 -9.8</gravity>
     <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
-    <atmosphere type='adiabatic'/>
+
+    <atmosphere type="adiabatic">
+      <temperature>303.15</temperature> <!-- 30 °C -->
+      <pressure>101325</pressure>       <!-- Pa -->
+      <humidity>0.6</humidity>          <!-- 60% -->
+    </atmosphere>
+
     <physics type='ode'>
       <max_step_size>0.001</max_step_size>
       <real_time_factor>1</real_time_factor>
@@ -78,7 +90,10 @@
       <background>0.7 0.7 0.7 1</background>
       <shadows>1</shadows>
     </scene>
-    <wind/>
+    <wind>
+      <linear_velocity>1.0 0.5 0.0</linear_velocity>  <!-- m/s -->
+    </wind>
+
     <spherical_coordinates>
       <surface_model>EARTH_WGS84</surface_model>
       <latitude_deg>0</latitude_deg>
@@ -86,6 +101,7 @@
       <elevation>0</elevation>
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
+
     <model name='unit_box'>
       <pose>-10.6447 3.41778 0.5 0 -0 0</pose>
       <link name='link'>
@@ -2435,5 +2451,7 @@
       <allow_auto_disable>1</allow_auto_disable>
       <pose>-1.23712 0.00846 0 0 -0 0</pose>
     </model>
+    <plugin name="velocity_control"
+        filename="/usr/lib/x86_64-linux-gnu/gz-sim-8/plugins/libgz-sim8-velocity-control-system.so"/>
   </world>
 </sdf>

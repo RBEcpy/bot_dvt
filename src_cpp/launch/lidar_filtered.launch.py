@@ -30,16 +30,11 @@ def generate_launch_description():
         description='Params file (ROS 2 node schema)'
     )
 
-    # YAML phải có:
-    # scan_filter:
-    #   ros__parameters:
-    #     filter_chain_parameter_name: scan_filter_chain
-    #     scan_filter_chain: [ ... ]
     node = Node(
         package='laser_filters',
         executable='scan_to_scan_filter_chain',
-        name='scan_filter',                    # TRÙNG với key top-level trong YAML
-        parameters=[yaml_path],                # chỉ nạp 1 params-file
+        name='scan_filter',                    
+        parameters=[yaml_path],                
         remappings=[('scan', input_scan),
                     ('scan_filtered', output_scan)],
         output='screen'

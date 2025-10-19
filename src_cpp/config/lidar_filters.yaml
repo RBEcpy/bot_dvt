@@ -10,6 +10,7 @@ scan_filter:
           upper_threshold: 7.0
           lower_replacement_value: 0.0
           upper_replacement_value: 0.0
+          
       - name: median_filter
         type: laser_filters/LaserScanMedianFilter
         params:
