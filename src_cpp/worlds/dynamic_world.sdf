@@ -68,7 +68,13 @@
     </model>
     <gravity>0 0 -9.8</gravity>
     <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
-    <atmosphere type='adiabatic'/>
+    <!-- <atmosphere type='adiabatic'/> -->
+    <atmosphere type="adiabatic">
+      <temperature>295</temperature>
+      <pressure>101325</pressure>
+      <humidity>0.6</humidity>
+    </atmosphere>
+
     <physics type='ode'>
       <max_step_size>0.001</max_step_size>
       <real_time_factor>1</real_time_factor>
@@ -82,7 +88,16 @@
     <audio>
       <device>default</device>
     </audio>
-    <wind/>
+    <!-- <wind/> -->
+    <wind>
+      <linear_velocity>3 3 0</linear_velocity>
+    </wind>
+
+    <plugin
+      name="gz::sim::systems::WindEffects"
+      filename="gz-sim-wind-effects-system">
+    </plugin>
+
     <spherical_coordinates>
       <surface_model>EARTH_WGS84</surface_model>
       <latitude_deg>0</latitude_deg>

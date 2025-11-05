@@ -11,17 +11,14 @@ find_package(rclcpp REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(ros_gz_interfaces REQUIRED)
 
+find_package(navigation2 REQUIRED)
+find_package(nav2_bringup REQUIRED)
+find_package(slam_toolbox REQUIRED)
+
 install(
-  DIRECTORY config description launch models worlds
+  DIRECTORY config description launch maps models worlds
   DESTINATION share/${PROJECT_NAME}
 )
-add_executable(multi_moving_box_controller_gz src/multi_moving_box_controller_rosgz.cpp)
-ament_target_dependencies(multi_moving_box_controller_gz
-  rclcpp geometry_msgs ros_gz_interfaces)
-  
-install(TARGETS multi_moving_box_controller_gz
-  DESTINATION lib/${PROJECT_NAME})
-
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

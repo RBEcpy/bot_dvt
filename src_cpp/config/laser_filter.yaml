@@ -1,0 +1,15 @@
+scan_filter:
+  ros__parameters:
+    - name: range_filter
+      type: laser_filters/LaserScanRangeFilter
+      params:
+        lower_threshold: 0.2
+        upper_threshold: 7.0
+        lower_replacement_value: 0.0
+        upper_replacement_value: 0.0
+          
+    - name: median_filter
+      type: laser_filters/LaserScanMedianFilter
+      params:
+        range_window: 5
+        intensity_window: 1

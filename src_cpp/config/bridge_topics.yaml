@@ -1,0 +1,13 @@
+topics:
+  # Clock (bắt buộc khi dùng use_sim_time)
+  - /clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock
+
+  - /cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist
+  - /odom@nav_msgs/msg/Odometry[gz.msgs.Odometry
+  - /joint_states@sensor_msgs/msg/JointState[gz.msgs.Model
+  - /tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V
+
+  # 2D LiDAR
+  - /scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan
+  - /scan/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked
+

@@ -8,7 +8,7 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 find_package(gz-plugin2 REQUIRED)
-find_package(gz-sim8 REQUIRED)    # <-- dùng 8, không phải 7
+find_package(gz-sim8 REQUIRED)
 find_package(gz-math7 REQUIRED)
 
 add_library(vertical_motion_system SHARED src/vertical_motion_system.cc)
