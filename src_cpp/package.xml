@@ -8,6 +8,9 @@
   <license>TODO: License declaration</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>ament_python</buildtool_depend>
+
+  <exec_depend>rclpy</exec_depend>
   <depend>rclcpp</depend>
   <depend>geometry_msgs</depend>
   <depend>ros_gz_interfaces</depend>
@@ -15,6 +18,9 @@
   <depend>slam_toolbox</depend>
 
   <!-- Dependencies cho mô tả robot -->
+  <exec_depend>rcl_interfaces</exec_depend>
+  <exec_depend>tf_transformations</exec_depend>
+  
   <exec_depend>xacro</exec_depend>
   <exec_depend>robot_state_publisher</exec_depend>
   <exec_depend>joint_state_publisher</exec_depend>

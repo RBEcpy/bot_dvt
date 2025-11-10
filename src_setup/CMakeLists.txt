@@ -19,6 +19,10 @@ target_link_libraries(vertical_motion_system
   gz-plugin2::gz-plugin2
   gz-math7::gz-math7
 )
+install(
+  DIRECTORY launch
+  DESTINATION share/${PROJECT_NAME}
+)
 
 set_target_properties(vertical_motion_system PROPERTIES OUTPUT_NAME vertical_motion_system)
 

@@ -7,6 +7,8 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(ament_cmake_python REQUIRED)
+
 find_package(rclcpp REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(ros_gz_interfaces REQUIRED)
@@ -16,8 +18,13 @@ find_package(nav2_bringup REQUIRED)
 find_package(slam_toolbox REQUIRED)
 
 install(
-  DIRECTORY config description launch maps models worlds
+  DIRECTORY config description launch maps models save_model  worlds
   DESTINATION share/${PROJECT_NAME}
+)
+install(PROGRAMS
+  nodes/dqn_inference_rclpy.py  
+  DESTINATION lib/${PROJECT_NAME}
+  RENAME dqn_inference
 )
 
 if(BUILD_TESTING)

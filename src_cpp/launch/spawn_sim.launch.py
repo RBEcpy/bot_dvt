@@ -33,7 +33,8 @@ def generate_launch_description():
 
     cpp_prefix    = get_package_prefix('src_cpp')
     plugin_prefix = get_package_prefix('src_setup')
-
+   
+        #    <-- objectcle -->
     set_res_path = SetEnvironmentVariable(
         'GZ_SIM_RESOURCE_PATH',
         f"{cpp_prefix}/share:{os.path.join(share,'models')}:{os.path.join(share,'worlds')}"
@@ -147,7 +148,7 @@ def generate_launch_description():
         )
     )
 
-    # ---- Bridges tối thiểu ----
+    # ---- Bridges ----
     def load_bridge_topics(path):
         with open(path, 'r') as f:
             data = yaml.safe_load(f) or {}
