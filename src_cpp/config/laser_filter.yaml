@@ -1,15 +1,24 @@
-scan_filter:
+laser_filters:
   ros__parameters:
-    - name: range_filter
-      type: laser_filters/LaserScanRangeFilter
-      params:
-        lower_threshold: 0.2
-        upper_threshold: 7.0
-        lower_replacement_value: 0.0
-        upper_replacement_value: 0.0
-          
-    - name: median_filter
-      type: laser_filters/LaserScanMedianFilter
-      params:
-        range_window: 5
-        intensity_window: 1
+    use_message_timestamps: true
+
+    scan_filter_chain: |
+      - name: range_clip
+        type: laser_filters/LaserScanRangeFilter
+        params:
+          lower_threshold: 0.15
+          upper_threshold: 12.0
+          lower_replacement_value: 0.0
+          upper_replacement_value: 0.0
+
+      - name: speckle_noise
+        type: laser_filters/LaserScanSpeckleFilter
+        params:
+          max_range: 12.0
+          max_separation: 0.05
+          min_consecutive: 2
+
+      - name: median_5
+        type: laser_filters/MedianFilter
+        params:
+          window: 5

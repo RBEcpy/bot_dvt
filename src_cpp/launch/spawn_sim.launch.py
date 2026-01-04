@@ -31,19 +31,6 @@ def generate_launch_description():
     bridge_yaml = os.path.join(share, 'config', 'bridge_topics.yaml')
     twist_mux_params_file = os.path.join(share, 'config', 'twist_mux.yaml')
 
-    cpp_prefix    = get_package_prefix('src_cpp')
-    plugin_prefix = get_package_prefix('src_setup')
-   
-        #    <-- objectcle -->
-    set_res_path = SetEnvironmentVariable(
-        'GZ_SIM_RESOURCE_PATH',
-        f"{cpp_prefix}/share:{os.path.join(share,'models')}:{os.path.join(share,'worlds')}"
-    )
-    set_sys_plugins = SetEnvironmentVariable(
-        'GZ_SIM_SYSTEM_PLUGIN_PATH',
-        f"{plugin_prefix}/lib"
-    )
-
     # ---- robot_description from xacro ----
     robot_description_cmd = Command(['xacro ', xacro_file])
     params = {
@@ -168,8 +155,6 @@ def generate_launch_description():
 
     ld = LaunchDescription()
     ld.add_action(declare_use_sim_time)
-    ld.add_action(set_res_path)       # <<< thêm từ obstacle_world
-    ld.add_action(set_sys_plugins)    # <<< thêm từ obstacle_world
     ld.add_action(node_rsp)
     ld.add_action(gz)
     ld.add_action(node_twist_mux)

@@ -1,9 +1,9 @@
 <sdf version='1.7'>
   <world name='default'>
     <!-- Một hoặc nhiều model -->
-    <include>
+    <!-- <include>
       <uri>model://VerticalMotion</uri>
-    </include>
+    </include> -->
 
 
     <light name='sun' type='directional'>
@@ -2451,7 +2451,7 @@
       <allow_auto_disable>1</allow_auto_disable>
       <pose>-1.23712 0.00846 0 0 -0 0</pose>
     </model>
-    <plugin name="velocity_control"
-        filename="/usr/lib/x86_64-linux-gnu/gz-sim-8/plugins/libgz-sim8-velocity-control-system.so"/>
+    <!-- <plugin name="velocity_control"
+        filename="/usr/lib/x86_64-linux-gnu/gz-sim-8/plugins/libgz-sim8-velocity-control-system.so"/> -->
   </world>
 </sdf>

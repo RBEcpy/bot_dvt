@@ -22,7 +22,7 @@ def generate_launch_description():
     map_yaml     = LaunchConfiguration('map')
 
     declare_use_sim_time = DeclareLaunchArgument(
-        'use_sim_time', default_value='true',
+        'use_sim_time', default_value='false',
         description='Use simulated clock (Gazebo)'
     )
 
@@ -39,7 +39,7 @@ def generate_launch_description():
 
     declare_map = DeclareLaunchArgument(
         'map',
-        default_value=os.path.join(pkg_dir, 'maps', 'my_map.yaml'),
+        default_value=os.path.join(pkg_dir, 'maps', 'map.yaml'),
         description='Path to a prebuilt map.yaml (used when use_amcl=true)'
     )
 

@@ -95,6 +95,13 @@ controller_server:
       yaw_goal_tolerance: 0.25
     FollowPath:
       plugin: "teb_local_planner::TebLocalPlannerROS"
+      # --- Chỉ các tham số tốc độ ---
+      max_vel_x: 0.8           # m/s (tiến)
+      max_vel_x_backwards: 0.3 # m/s (lùi) - có thể bỏ nếu không cần
+      max_vel_theta: 1.5       # rad/s (quay)
+      acc_lim_x: 1.0           # m/s^2
+      acc_lim_theta: 2.0       # rad/s^2
+
 
   # Danh sách critics (thứ tự có ý nghĩa trong tính điểm)
       critics:
@@ -234,8 +241,8 @@ global_costmap:
         map_subscribe_transient_local: True
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 1.0  
-        inflation_radius: 0.05
+        cost_scaling_factor: 5.0  
+        inflation_radius: 0.5
       always_send_full_costmap: True
 
 
@@ -308,10 +315,9 @@ velocity_smoother:
     smoothing_frequency: 20.0
     scale_velocities: False
     feedback: "OPEN_LOOP"
-    max_velocity: [0.5, 0.0, 2.0]
-    min_velocity: [-0.5, 0.0, -2.0]
-    max_accel: [2.5, 0.0, 3.2]
-    max_decel: [-2.5, 0.0, -3.2]
+    max_velocity: [0.8, 0.0, 1.5]
+    max_accel:    [1.0, 0.0, 2.0]
+    max_decel:    [-1.0, 0.0, -2.0]
     odom_topic: "odom"
     odom_duration: 0.1
     deadband_velocity: [0.0, 0.0, 0.0]
